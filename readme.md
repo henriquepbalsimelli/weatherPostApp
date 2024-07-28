@@ -1,7 +1,7 @@
 Para que as integrações funcionem como devem, você precisa criar uma conta no site https://openweathermap.org e obter as credenciais para poder realizar requisições à API deles. 
 Assim que conseguir a chave de API, substitua o valor fornecido por eles e insira na variável WEATHER_APP_API_KEY.
 
-Além disso, para que o sistema consiga realizar postagens em seu nome no X, você deve habilitar a conta de desenvolvedor: https://developer.x.com/en 
+Além disso, para que o sistema consiga realizar postagens em seu nome no X, você deve habilitar a conta de desenvolvedor: https://developer.x.com/en.
 Nesse portal, você deve criar um projeto e obter as credenciais necessárias para realizar a integração.
 
 ```
