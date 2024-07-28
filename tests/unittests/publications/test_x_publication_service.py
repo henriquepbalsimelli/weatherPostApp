@@ -6,6 +6,7 @@ from unittest.mock import Mock
 from fastapi import HTTPException
 from marshmallow import EXCLUDE, ValidationError
 import pytest
+import requests
 from app.services.x_services.x_publication_service import XPublicationService
 from app.tools.open_weather_map_sdk.dtos.current_weather_response_dto import MainDataDto, WeatherDataDto, WeatherDayResponseDto
 from app.tools.open_weather_map_sdk.dtos.weather_prevision_dto import CityDto, WeatherPrevisionDto
@@ -14,6 +15,7 @@ import datetime
 
 from app.tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
 from app.tools.open_weather_map_sdk.schemas.get_weather_prevision_schema import WeatherPrevisionSchema
+from app.tools.x_tools.sdk import XSdk
 
 
 def test_city_does_not_exist():
@@ -78,14 +80,21 @@ def test_created_post_ok():
                 ),
             ],
     )
+
+    x_sdk = XSdk()
+
+    x_sdk.create_post = Mock(sped=x_sdk.create_post, wraps=x_sdk.create_post)
+    x_sdk.create_post.return_value = requests.Response
     
     x_publication_service = XPublicationService(
-        weather_sdk=weather_sdk_mock
+        weather_sdk=weather_sdk_mock,
+        x_sdk=x_sdk
     )
 
     x_publication_service.handle_create_x_publication(city_name='Brasilia')
     weather_sdk_mock.get_current_weather.assert_called_once()
     weather_sdk_mock.get_weather_prevision.assert_called_once()
+    x_sdk.create_post.assert_called_once()
 
 
 def testing_integration_weather_day_schema_ok():

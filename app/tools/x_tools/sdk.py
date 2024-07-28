@@ -28,7 +28,7 @@ class XSdk:
                 detail='X Network error' + response.text
             )
         
-    def create_post(self, post_string: str):
+    def create_post(self, post_string: str) -> requests.Response:
         try:
             oauth = self.get_auth()
 
