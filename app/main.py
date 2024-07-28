@@ -1,6 +1,4 @@
 from fastapi import FastAPI
-from os.path import join, dirname
-from dotenv import load_dotenv
 
 from .routers.publications import x_publications
 

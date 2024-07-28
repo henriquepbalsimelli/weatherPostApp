@@ -7,13 +7,13 @@ from fastapi import HTTPException
 from marshmallow import EXCLUDE, ValidationError
 import pytest
 from app.services.x_services.x_publication_service import XPublicationService
-from tools.open_weather_map_sdk.dtos.current_weather_response_dto import MainDataDto, WeatherDataDto, WeatherDayResponseDto
-from tools.open_weather_map_sdk.dtos.weather_prevision_dto import CityDto, WeatherPrevisionDto
-from tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
+from app.tools.open_weather_map_sdk.dtos.current_weather_response_dto import MainDataDto, WeatherDataDto, WeatherDayResponseDto
+from app.tools.open_weather_map_sdk.dtos.weather_prevision_dto import CityDto, WeatherPrevisionDto
+from app.tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
 import datetime
 
-from tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
-from tools.open_weather_map_sdk.schemas.get_weather_prevision_schema import WeatherPrevisionSchema
+from app.tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
+from app.tools.open_weather_map_sdk.schemas.get_weather_prevision_schema import WeatherPrevisionSchema
 
 
 def test_city_does_not_exist():
