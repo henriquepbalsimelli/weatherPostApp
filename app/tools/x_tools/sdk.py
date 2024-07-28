@@ -41,10 +41,11 @@ class XSdk:
 
             return response
 
+        except HTTPException as e:
+            raise e
         except Exception as e:
             self.__logger.exception(e)
             raise HTTPException(
                 status_code=response.status_code,
                 detail="Houve um problema para criar postagem no X"
             )
-            
