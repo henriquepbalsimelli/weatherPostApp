@@ -1,17 +1,20 @@
-from fastapi import APIRouter
+import json
+from fastapi.params import Query
+from typing_extensions import Annotated
+from fastapi import APIRouter, datastructures
+from app.services.x_services.x_publication_service import XPublicationService
+
 
 router = APIRouter(
     prefix="/x",
-    tags=["items"],
-    responses={404: {"description": "Not found"}},
 )
 
-fake_items_db = {"plumbus": {"name": "Plumbus"}, "gun": {"name": "Portal Gun"}}
 
-@router.get("/users/", tags=["users"])
-async def read_users():
-    return fake_items_db
-
-@router.post("/publication", tags=["publications"])
-async def create_x_publication():
-    return {'status': 'created'}
+@router.post("/publication/", tags=["publications"])
+async def create_x_publication(city_name: Annotated[str, Query(min_length=3)]):
+    try:
+        x_publication_service = XPublicationService()
+        created_publication = x_publication_service.handle_create_x_publication(city_name)
+        return created_publication
+    except Exception as e:
+        raise e
