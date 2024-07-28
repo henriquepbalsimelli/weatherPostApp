@@ -1,5 +1,3 @@
-# Instruções para executar a aplicação
-
 Para que as integrações funcionem como devem, você precisa criar uma conta no site https://openweathermap.org e obter as credenciais para poder realizar requisições à API deles. 
 Assim que conseguir a chave de API, substitua o valor fornecido por eles e insira na variável WEATHER_APP_API_KEY.
 
@@ -12,6 +10,8 @@ X_API_SECRET_KEY -> fornecido juntamente com X_API_KEY
 X_ACCESS_TOKEN -> Na aba "chaves e token" da sua aplicação no portal do desenvolvedor, você poderá gerar uma chave dessa.
 
 X_ACCESS_TOKEN_SECRET -> Será fornecedia juntamente com X_ACCESS_TOKEN.
+
+# Instruções para executar a aplicação
 
 1. É necessário o Docker instalado
 2. Clone o projeto (git clone https://github.com/henriquepbalsimelli/weatherPostApp.git)
