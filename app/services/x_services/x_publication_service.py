@@ -88,7 +88,7 @@ class XPublicationService():
         except Exception as e:
             raise HTTPException(
                 status_code=400,
-                detail="Houve um problema na identficação dos dados de cidades disponíveis"
+                detail="Houve um problema na identficação dos dados de cidades disponíveis: " + str(e)
             )
     
     def format_date(self, weather_prevision: WeatherPrevisionDto, current_weather: WeatherDayResponseDto):
