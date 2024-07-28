@@ -1,6 +1,6 @@
 from fastapi.params import Query
 from typing_extensions import Annotated
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.services.x_services.x_publication_service import XPublicationService
 
 
@@ -15,5 +15,10 @@ async def create_x_publication(city_name: Annotated[str, Query(min_length=3)]):
         x_publication_service = XPublicationService()
         created_publication = x_publication_service.handle_create_x_publication(city_name)
         return {"Status": f"Publicação criada com sucesso: {created_publication}"}
-    except Exception as e:
+    except HTTPException as e:
         raise e
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail="Houve um problema inesperado"
+        )

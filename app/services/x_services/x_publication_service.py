@@ -69,10 +69,16 @@ class XPublicationService():
             raise e
     
     def __get_city_data(self) -> List[CityWeatherDataDto]:
-        cities_file = pd.read_excel(
-            'app/public/cities_list.xlsx'
-        )
-
+        try:
+            cities_file = pd.read_excel(
+                'app/public/cities_list.xlsx'
+            )
+        except Exception as e:
+            raise HTTPException(
+                status_code=400,
+                detail="Não foi possível encontrar o arquivo de cidades disponíveis"
+            )
+        
         cities_formated_list = []
         for row in cities_file.values:
             cities_formated_list.append(
