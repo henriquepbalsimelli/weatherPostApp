@@ -73,23 +73,23 @@ class XPublicationService():
             cities_file = pd.read_excel(
                 'app/public/cities_list.xlsx'
             )
+        
+            cities_formated_list = []
+            for row in cities_file.values:
+                cities_formated_list.append(
+                    CityWeatherDataDto(
+                        name=row[0],
+                        lon=row[1],
+                        lat=row[2],
+                        country=row[3]
+                    )
+                )
+            return cities_formated_list
         except Exception as e:
             raise HTTPException(
                 status_code=400,
-                detail="Não foi possível encontrar o arquivo de cidades disponíveis"
+                detail="Houve um problema na identficação dos dados de cidades disponíveis"
             )
-        
-        cities_formated_list = []
-        for row in cities_file.values:
-            cities_formated_list.append(
-                CityWeatherDataDto(
-                    name=row[0],
-                    lon=row[1],
-                    lat=row[2],
-                    country=row[3]
-                )
-            )
-        return cities_formated_list
     
     def format_date(self, weather_prevision: WeatherPrevisionDto, current_weather: WeatherDayResponseDto):
         current_weather.dt = get_date_from_timestamp_and_tzint(
