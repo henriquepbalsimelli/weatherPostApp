@@ -1,10 +1,11 @@
 import decimal
 import logging
-from typing import List
+import requests
+
 from fastapi import HTTPException
 from marshmallow import EXCLUDE, ValidationError
-import requests
 from configurations import get_env
+
 from tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
 from tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
 from tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
@@ -64,7 +65,6 @@ class OpenWeatherMapSdk:
                 url=url
             )
             self.__validate_response(response)
-            json_response = response.json()
             return WeatherPrevisionSchema(unknown=EXCLUDE).load(response.json())
         except TypeError as e:
             self.__logger.error(msg="INTEGRATION WEATHER MAP ERROR - GET WEATHER PREVISION")

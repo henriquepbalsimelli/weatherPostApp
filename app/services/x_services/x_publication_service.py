@@ -1,21 +1,28 @@
 import logging
-from operator import indexOf
+import pandas as pd
+
 from typing import List
 
 from fastapi import HTTPException
-from app.dtos.city_data_dto import CityWeatherDataDto
+
 from app.utils.tools import get_date_from_timestamp_and_tzint
+
+from app.dtos.city_data_dto import CityWeatherDataDto
 from tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
 from tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
 from tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
-import pandas as pd
+
+from tools.x_tools.sdk import XSdk
 
 class XPublicationService():
     def __init__(
             self,
-            weather_sdk = OpenWeatherMapSdk()
+            x_sdk = XSdk(),
+            weather_sdk = OpenWeatherMapSdk(),
         ):
         self.__logger = logging.getLogger(__name__)
+        
+        self.__x_sdk = x_sdk
         self.__weather_sdk = weather_sdk
 
     def handle_create_x_publication(self, city_name: str):
@@ -38,7 +45,10 @@ class XPublicationService():
                 lat=city.lat
             )
 
-            self.format_date(weather_prevision=weather_prevision, current_weather=current_weather)
+            self.format_date(
+                weather_prevision=weather_prevision, 
+                current_weather=current_weather
+            )
 
             average_temp_by_date = self.__get_temp_by_dates(
                 weather_prevision=weather_prevision
@@ -48,6 +58,10 @@ class XPublicationService():
                 average_temp_by_date=average_temp_by_date,
                 current_temp=current_weather,
                 city_name=city_name
+            )
+
+            self.__x_sdk.create_post(
+                post_string
             )
 
             return post_string
@@ -107,7 +121,7 @@ class XPublicationService():
         for temp_date, temp_data in average_temp_by_date.items():
             length = average_temp_by_date.__len__()
             if index == 0:
-                final_str = f"{current_temp.main.temp}°C e {current_temp.weather[0].description} em {city_name} em {current_temp.dt}. Média para os próximos dias: "
+                final_str = f"{round(current_temp.main.temp)}°C e {current_temp.weather[0].description} em {city_name} em {current_temp.dt}. Média para os próximos dias: "
                 index += 1
                 continue
 
