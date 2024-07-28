@@ -4,12 +4,10 @@ Assim que conseguir a chave de API, substitua o valor fornecido por eles e insir
 Além disso, para que o sistema consiga realizar postagens em seu nome no X, você deve habilitar a conta de desenvolvedor: https://developer.x.com/en 
 Nesse portal, você deve criar um projeto e obter as credenciais necessárias para realizar a integração.
 
-X_API_KEY -> é fornecedio apenas uma vez durante a criação do projeto no portal do desenvolvedor
-X_API_SECRET_KEY -> fornecido juntamente com X_API_KEY
-
-X_ACCESS_TOKEN -> Na aba "chaves e token" da sua aplicação no portal do desenvolvedor, você poderá gerar uma chave dessa.
-
-X_ACCESS_TOKEN_SECRET -> Será fornecedia juntamente com X_ACCESS_TOKEN.
+  X_API_KEY -> é fornecedio apenas uma vez durante a criação do projeto no portal do desenvolvedor
+  X_API_SECRET_KEY -> fornecido juntamente com X_API_KEY
+  X_ACCESS_TOKEN -> Na aba "chaves e token" da sua aplicação no portal do desenvolvedor, você poderá gerar uma chave dessa.
+  X_ACCESS_TOKEN_SECRET -> Será fornecedia juntamente com X_ACCESS_TOKEN.
 
 # Instruções para executar a aplicação
 
