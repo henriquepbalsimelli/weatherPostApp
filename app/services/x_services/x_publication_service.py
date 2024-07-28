@@ -8,11 +8,11 @@ from fastapi import HTTPException
 from app.utils.tools import get_date_from_timestamp_and_tzint
 
 from app.dtos.city_data_dto import CityWeatherDataDto
-from tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
-from tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
-from tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
+from app.tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
+from app.tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
+from app.tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
 
-from tools.x_tools.sdk import XSdk
+from app.tools.x_tools.sdk import XSdk
 
 class XPublicationService():
     def __init__(
@@ -70,7 +70,7 @@ class XPublicationService():
     
     def __get_city_data(self) -> List[CityWeatherDataDto]:
         cities_file = pd.read_excel(
-            'cities_list.xlsx'
+            'app/public/cities_list.xlsx'
         )
 
         cities_formated_list = []

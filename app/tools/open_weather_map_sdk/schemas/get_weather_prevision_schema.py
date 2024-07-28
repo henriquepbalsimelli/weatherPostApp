@@ -2,9 +2,9 @@
 
 from marshmallow import EXCLUDE, Schema, fields, post_load
 
-from tools.open_weather_map_sdk.dtos.weather_prevision_dto import CityDto, WeatherPrevisionDto
+from app.tools.open_weather_map_sdk.dtos.weather_prevision_dto import CityDto, WeatherPrevisionDto
 
-from tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
+from app.tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
 
 class CitySchema(Schema):
     timezone: int = fields.Integer(

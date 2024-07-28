@@ -2,7 +2,7 @@
 
 from marshmallow import EXCLUDE, Schema, fields, post_load
 
-from tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto, MainDataDto, WeatherDataDto
+from app.tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto, MainDataDto, WeatherDataDto
 
 
 class MainData(Schema):

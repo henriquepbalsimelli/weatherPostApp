@@ -1,7 +1,7 @@
 import logging
 from fastapi import HTTPException
 from requests_oauthlib import OAuth1Session
-from configurations import get_env
+from app.configurations import get_env
 import requests
 
 class XSdk:

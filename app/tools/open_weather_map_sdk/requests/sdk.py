@@ -4,12 +4,12 @@ import requests
 
 from fastapi import HTTPException
 from marshmallow import EXCLUDE, ValidationError
-from configurations import get_env
+from app.configurations import get_env
 
-from tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
-from tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
-from tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
-from tools.open_weather_map_sdk.schemas.get_weather_prevision_schema import WeatherPrevisionSchema
+from app.tools.open_weather_map_sdk.dtos.current_weather_response_dto import WeatherDayResponseDto
+from app.tools.open_weather_map_sdk.dtos.weather_prevision_dto import WeatherPrevisionDto
+from app.tools.open_weather_map_sdk.schemas.get_current_weather_schema import WeatherDaySchema
+from app.tools.open_weather_map_sdk.schemas.get_weather_prevision_schema import WeatherPrevisionSchema
 
 class OpenWeatherMapSdk:
     def __init__(self):
