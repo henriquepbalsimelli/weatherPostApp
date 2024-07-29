@@ -14,6 +14,8 @@ from app.tools.open_weather_map_sdk.requests.sdk import OpenWeatherMapSdk
 
 from app.tools.x_tools.sdk import XSdk
 
+from tweepy.errors import HTTPException as TweepyHTTPException
+
 class XPublicationService():
     def __init__(
             self,
@@ -65,6 +67,8 @@ class XPublicationService():
             )
 
             return post_string
+        except TweepyHTTPException as e:
+            raise e
         except Exception as e:
             raise e
     

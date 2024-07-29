@@ -1,8 +1,8 @@
 import logging
 from fastapi import HTTPException
-from requests_oauthlib import OAuth1Session
 from app.configurations import get_env
-import requests
+import tweepy
+from tweepy.errors import HTTPException as TweepyHTTPException
 
 class XSdk:
     def __init__(self) -> None:
@@ -12,40 +12,28 @@ class XSdk:
         self.__access_token = get_env('X_ACCESS_TOKEN')
         self.__access_token_secret = get_env('X_ACCESS_TOKEN_SECRET')
 
-    def get_auth(self):
-        oauth = OAuth1Session(
-            self.__consumer_key,
-            client_secret=self.__consumer_secret,
-            resource_owner_key=self.__access_token,
-            resource_owner_secret=self.__access_token_secret
+    def get_auth(self) -> tweepy.Client:
+        client = tweepy.Client(
+            consumer_key=self.__consumer_key,
+            consumer_secret=self.__consumer_secret,
+            access_token=self.__access_token,
+            access_token_secret=self.__access_token_secret
         )
-        return oauth
-
-    def __validate_response(self, response: requests.Response):
-        if response.status_code not in [200, 201]:
-            raise HTTPException(
-                status_code=response.status_code,
-                detail='X Network error' + response.text
-            )
+        return client
         
-    def create_post(self, post_string: str) -> requests.Response:
+    def create_post(self, post_string: str) -> tweepy.Response:
         try:
-            oauth = self.get_auth()
+            client = self.get_auth()
 
-            url = 'https://api.twitter.com/2/tweets'
-            payload = {"text": post_string}
-
-            response = oauth.post(url, json=payload)
-
-            self.__validate_response(response=response)
+            response = client.create_tweet(text=post_string)
 
             return response
 
-        except HTTPException as e:
+        except TweepyHTTPException as e:
             raise e
         except Exception as e:
             self.__logger.exception(e)
             raise HTTPException(
-                status_code=response.status_code,
+                status_code=500,
                 detail="Houve um problema para criar postagem no X"
             )
