@@ -6,9 +6,6 @@ app = FastAPI()
 
 app.include_router(x_publications.router)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello!"}
 
 @app.get("/health")
 async def read_root():
