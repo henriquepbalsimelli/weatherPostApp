@@ -22,3 +22,6 @@ Nesse portal, você deve criar um projeto e obter as credenciais necessárias pa
 
 
 Obs: caso você tente buildar a aplicação sem a .env, o sistema não irá funcionar. Para arrumar, terá que excluir a imagem e o container criados e builda-los de novo.
+
+
+![image](https://github.com/user-attachments/assets/515b7009-a959-4043-9c7f-ef6c23406ecb)
