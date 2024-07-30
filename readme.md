@@ -14,7 +14,7 @@ Nesse portal, você deve criar um projeto e obter as credenciais necessárias pa
 # Instruções para executar a aplicação
 
 1. É necessário o Docker instalado
-2. Clone o projeto [WeatherPostApp](https://github.com/henriquepbalsimelli/weatherPostApp.git) ```https://github.com/henriquepbalsimelli/weatherPostApp.git```
+2. Clone o projeto [WeatherPostApp](https://github.com/henriquepbalsimelli/weatherPostApp.git) ```git clone https://github.com/henriquepbalsimelli/weatherPostApp.git```
 3. Insira o arquivo .env na pasta /app
 4. Rode o seguinte comando: `docker build -t weatherappimage .`
 5. Após o build, rode o seguinte comando: `docker run -d --name weatherappcontainer -p 80:80 weatherappimage`
